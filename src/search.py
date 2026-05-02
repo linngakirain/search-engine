@@ -2,7 +2,13 @@ from src.indexer import tokenize
 
 
 def print_word(word, index, docs):
-    word = word.lower()
+    word = word.strip().lower()
+    if word == "":
+        print("Please enter a word.")
+        return
+    if len(word.split()) != 1:
+        print("Please enter one word only.")
+        return
     if index is None or docs is None:
         print("Run build or load first.")
         return
@@ -52,6 +58,9 @@ def phrase_here(doc_id, pos, words, index):
 def display_find_results(phrase, doc_ids, docs):
     if docs is None:
         print("Run build or load first.")
+        return
+    if phrase.strip() == "":
+        print("Please enter a phrase.")
         return
     if not doc_ids:
         print(f"No pages contain '{phrase}'.")

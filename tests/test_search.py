@@ -36,11 +36,29 @@ class TestSearch(unittest.TestCase):
             print_word("nonsense", self.index, self.docs)
         self.assertIn("not found", out.getvalue().lower())
 
+    def test_print_multiple_words(self):
+        out = io.StringIO()
+        with redirect_stdout(out):
+            print_word("good friends", self.index, self.docs)
+        self.assertIn("please enter one word only", out.getvalue().lower())
+
+    def test_print_empty_word(self):
+        out = io.StringIO()
+        with redirect_stdout(out):
+            print_word("   ", self.index, self.docs)
+        self.assertIn("please enter a word", out.getvalue().lower())
+
     def test_display_find_results_empty(self):
         out = io.StringIO()
         with redirect_stdout(out):
             display_find_results("unknown", [], self.docs)
         self.assertIn("no pages contain", out.getvalue().lower())
+
+    def test_display_find_results_empty_phrase(self):
+        out = io.StringIO()
+        with redirect_stdout(out):
+            display_find_results("   ", [], self.docs)
+        self.assertIn("please enter a phrase", out.getvalue().lower())
 
 if __name__ == '__main__':
     unittest.main()

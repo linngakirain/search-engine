@@ -53,20 +53,18 @@ def main():
                 print("No index created, run 'build' first.")
 
         elif cmd == "print":
-            if rest:
-                print_word(rest.lower(), index, docs)
+            print_word(rest, index, docs)
 
         elif cmd == "find":
-            if rest:
-                q = rest.lower()
-                hits = find_phrase(q, index)
-                display_find_results(q, hits, docs)
+            q = rest.lower()
+            hits = find_phrase(q, index)
+            display_find_results(q, hits, docs)
 
         elif cmd == "exit":
             break
 
         else:
-            print("Commands: build, load, print <word>, find <phrase>, exit")
+            print("Please enter a valid command. Commands: build, load, print <word>, find <phrase>, exit")
 
 
 if __name__ == "__main__":
