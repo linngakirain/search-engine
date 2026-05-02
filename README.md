@@ -11,16 +11,15 @@ python3 -m pip install -r requirements.txt
 ## Run The App
 
 ```bash
-PYTHONPATH=. python3 -m src.main
+python3 -m src.main
 ```
 
 Then use these commands in the shell:
 
 - `build`
 - `load`
-- `print nonsense`
-- `find indifference`
-- `find good friends`
+- `print <word>`
+- `find <word or phrase>`
 - `exit`
 
 ## Testing
@@ -31,19 +30,7 @@ Run all tests:
 PYTHONPATH=. python3 -m unittest discover -s tests -q
 ```
 
-Run one test file:
-
-```bash
-python3 -m unittest tests.test_crawler
-```
-```bash
-python3 -m unittest tests.test_indexer
-```
-```bash
-python3 -m unittest tests.test_search
-```
-
-Run detailed per-test output:
+Run test file:
 
 ```bash
 python3 -m unittest -v tests.test_crawler

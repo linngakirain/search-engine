@@ -2,21 +2,21 @@ import json
 import os
 
 from src.crawler import crawl
-from src.indexer import build_index, save_index, load_index
+from src.indexer import build_index
 from src.search import display_find_results, find_phrase, print_word
 
 INDEX_PATH = "data/index.json"
-DOCS_PATH = "data/docs.json"
 
 
-def save_docs(docs):
-    with open(DOCS_PATH, "w") as f:
-        json.dump(docs, f)
+def save_data(index, docs):
+    with open(INDEX_PATH, "w") as f:
+        json.dump({"index": index, "docs": docs}, f)
 
 
-def load_docs():
-    with open(DOCS_PATH) as f:
-        return json.load(f)
+def load_data():
+    with open(INDEX_PATH) as f:
+        data = json.load(f)
+    return data["index"], data["docs"]
 
 
 def main():
@@ -38,20 +38,19 @@ def main():
         rest = parts[1].strip() if len(parts) > 1 else ""
 
         if cmd == "build":
+            print("Building index... Please wait.")
             docs = crawl()
             index = build_index(docs)
             os.makedirs("data", exist_ok=True)
-            save_index(index, INDEX_PATH)
-            save_docs(docs)
-            print("Saved.")
+            save_data(index, docs)
+            print("Build complete.")
 
         elif cmd == "load":
             try:
-                index = load_index(INDEX_PATH)
-                docs = load_docs()
-                print("Loaded.")
+                index, docs = load_data()
+                print("Load complete.")
             except FileNotFoundError:
-                print("No saved index yet, run build first.")
+                print("No index created, run 'build' first.")
 
         elif cmd == "print":
             if rest:
@@ -63,7 +62,7 @@ def main():
                 hits = find_phrase(q, index)
                 display_find_results(q, hits, docs)
 
-        elif cmd in ("exit", "quit"):
+        elif cmd == "exit":
             break
 
         else:

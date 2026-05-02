@@ -12,9 +12,7 @@ def print_word(word, index, docs):
     print(f"Inverted index for '{word}':")
     for doc_id, positions in index[word]:
         url = docs[doc_id][1]
-        short = positions[:10]
-        more = "..." if len(positions) > 10 else ""
-        print(f"  {url} -> positions {short}{more}")
+        print(f"  {url} -> positions {positions}")
 
 
 def find_phrase(phrase, index):
