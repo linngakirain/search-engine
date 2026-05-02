@@ -1,5 +1,7 @@
 import unittest
-from src.search import find_phrase, display_find_results
+import io
+from contextlib import redirect_stdout
+from src.search import find_phrase, display_find_results, print_word
 from src.indexer import build_index
 
 class TestSearch(unittest.TestCase):
@@ -23,6 +25,22 @@ class TestSearch(unittest.TestCase):
     def test_find_nonexistent(self):
         results = find_phrase("xyz abc", self.index)
         self.assertEqual(results, [])
+
+    def test_find_empty_query(self):
+        self.assertEqual(find_phrase("", self.index), [])
+        self.assertEqual(find_phrase("   ", self.index), [])
+
+    def test_print_nonexistent_word(self):
+        out = io.StringIO()
+        with redirect_stdout(out):
+            print_word("nonsense", self.index, self.docs)
+        self.assertIn("not found", out.getvalue().lower())
+
+    def test_display_find_results_empty(self):
+        out = io.StringIO()
+        with redirect_stdout(out):
+            display_find_results("unknown", [], self.docs)
+        self.assertIn("no pages contain", out.getvalue().lower())
 
 if __name__ == '__main__':
     unittest.main()
