@@ -1,11 +1,20 @@
 # Quotes Search Tool
 
-A command-line search engine for [quotes.toscrape.com](https://quotes.toscrape.com).
+A command-line search engine that crawls [quotes.toscrape.com](https://quotes.toscrape.com), builds an inverted index with word positions, and provides a CLI to search for exact phrases.
 
-## Setup
+## Installation & Setup
+# Clone or download the repository
+```bash
+git clone https://github.com/linngakirain/search-engine.git
+```
 
 ```bash
-python3 -m pip install -r requirements.txt
+cd search_tool
+```
+
+# Install dependencies
+```bash
+pip install -r requirements.txt
 ```
 
 ## Run The App
@@ -24,13 +33,13 @@ Then use these commands in the shell:
 
 ## Testing
 
-Run all tests:
+# Run all tests:
 
 ```bash
 PYTHONPATH=. python3 -m unittest discover -s tests -q
 ```
 
-Run test file:
+# Run test file:
 
 ```bash
 python3 -m unittest -v tests.test_crawler
