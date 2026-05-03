@@ -31,6 +31,38 @@ Then use these commands in the shell:
 - `find <word or phrase>`
 - `exit`
 
+Examples:
+> build
+Building index... Please wait.
+Build complete.
+
+> load
+Load complete.
+
+> print nonsense
+Inverted index for 'nonsense':
+  https://quotes.toscrape.com/page/2/ -> positions [398]
+  https://quotes.toscrape.com/page/7/ -> positions [293]
+
+> find good
+Pages containing 'good':
+  https://quotes.toscrape.com/page/1/
+  https://quotes.toscrape.com/page/2/
+  https://quotes.toscrape.com/page/3/
+  https://quotes.toscrape.com/page/6/
+  https://quotes.toscrape.com/page/7/
+  https://quotes.toscrape.com/page/9/
+  
+> find good friends
+Pages containing 'good friends':
+  https://quotes.toscrape.com/page/2/
+
+> find hand upon my chest is my hand
+Pages containing 'hand upon my chest is my hand':
+  https://quotes.toscrape.com/page/3/
+
+> exit
+
 ## Testing
 
 ### Run all tests:
